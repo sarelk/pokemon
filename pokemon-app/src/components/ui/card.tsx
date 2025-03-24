@@ -27,7 +27,7 @@ const Card = ({ item }: PostProps) => {
   };
 
   return (
-    <article className="flex items-end pl-5 pb-6 text-white  min-h-116 h-116 w-full bg-cover bg-center transform duration-300 hover:-translate-y-1 cursor-pointer  hover:shadow-2xl group rounded-lg" style={{ marginBottom: '200px', height: '200px', backgroundImage: `url(${itemBgImage})` }}>
+    <article className="flex items-end pl-5 pb-6 text-white  min-h-116 h-116 w-full bg-cover bg-center transform duration-300 hover:-translate-y-1 cursor-pointer  hover:shadow-2xl group rounded-lg" style={{ borderRadius: '120px', marginBottom: '200px', height: '200px', backgroundImage: `url(${itemBgImage})` }}>
       <div className="flex flex-col pokemon-metadata">
         <p className="font-bold flex justify-around items-center pokemon-name">{
           item.name.toUpperCase()}
