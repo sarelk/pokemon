@@ -2,14 +2,18 @@
 
 import { Pokemon } from "@/types";
 import Card from "@/components/ui/card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export interface PostProps {
   posts: Pokemon[] | null;
 }
 
 export function Posts({ posts }: PostProps) {
-  const [pokemons, setPokemons] = useState<Pokemon[] | null>(posts);
+  const [pokemons, setPokemons] = useState<Pokemon[] | null>(null);
+
+  useEffect(() => {
+    setPokemons(posts);
+  }, [posts]);
 
   const setFavourite = (pokemon: Pokemon) => {
     if (pokemons) {
@@ -17,6 +21,8 @@ export function Posts({ posts }: PostProps) {
         p.url === pokemon.url ? { ...p, favourite: !p.favourite } : p
       );
       setPokemons(updatedPokemons);
+      const stringifyPokemons = JSON.stringify(updatedPokemons);
+      localStorage.setItem('pokemons', stringifyPokemons);
     }
   };
 
@@ -31,7 +37,7 @@ export function Posts({ posts }: PostProps) {
           />
         ))
       ) : (
-        <div className="text-xl font-bold">Sorry, No Pokemnos available </div>
+        ''
       )}
     </>
   );

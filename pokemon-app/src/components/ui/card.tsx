@@ -42,7 +42,7 @@ const Card: React.FC<CardProps> = ({ item, onClick }) => {
       onClick={onClick}
     >
       <div className="flex flex-col pokemon-metadata">
-        <div className="font-bold flex justify-between items-center pokemon-name">
+        <div className="font-bold flex justify-around items-center pokemon-name">
           {item.name.toUpperCase()}
           <div className={`text-2xl ${isFavourite ? "text-red-500" : "text-white"}`}>
             &#10084;
