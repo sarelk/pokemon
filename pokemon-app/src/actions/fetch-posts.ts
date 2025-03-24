@@ -5,7 +5,7 @@ interface PokemonWithDetails extends Pokemon {
 }
 
 export async function fetchPosts(page: number): Promise<PokemonWithDetails[] | null> {
-  const perPage = 10;
+  const perPage = 20;
   const offset = (perPage * page) - perPage;
   const apiUrl = `https://pokeapi.co/api/v2/pokemon?limit=${perPage}&offset=${offset}`;
 
