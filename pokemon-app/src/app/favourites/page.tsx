@@ -14,13 +14,26 @@ const PostsPage = () => {
       const favouritePokemons = parsedPokemons.filter((pokemon: any) => pokemon.favourite);
       setPosts(favouritePokemons);
     }
-  }, [posts]);
+  }, []);
+
+  const removeFavourite = (pokemon: any) => {
+    const updatedPosts = posts.filter((p) => p.url !== pokemon.url);
+
+    const savedPokemons = localStorage.getItem('pokemons');
+    if (savedPokemons) {
+      const parsedPokemons = JSON.parse(savedPokemons);
+      const updatedPokemons = parsedPokemons.filter((p: any) => p.url !== pokemon.url);
+
+      localStorage.setItem('pokemons', JSON.stringify(updatedPokemons));
+    }
+
+    setPosts(updatedPosts);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8 min-h-screen ">
-      <h1 className="text-3xl font-bold mb-4 text-center">Favourite Pokemon</h1>
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-2">
-        <Posts posts={posts} />
+        <Posts posts={posts} onClick={removeFavourite} />
       </div>
     </div>
   );

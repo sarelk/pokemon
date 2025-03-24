@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 
 export interface PostProps {
   posts: Pokemon[] | null;
+  onClick?: () => void;
 }
 
 export function Posts({ posts }: PostProps) {
