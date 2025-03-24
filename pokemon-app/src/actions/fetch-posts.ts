@@ -25,6 +25,7 @@ export async function fetchPosts(page: number): Promise<PokemonWithDetails[] | n
           name: pokemon.name,
           url: pokemon.url,
           details,
+          favourite: false,
         };
       })
     );

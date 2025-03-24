@@ -1,17 +1,21 @@
 import { Pokemon } from "@/types";
-export interface PostProps {
-  item: any | null;
+
+export interface CardProps {
+  item: Pokemon;
+  onClick?: () => void;
 }
 
-const Card = ({ item }: PostProps) => {
+const Card: React.FC<CardProps> = ({ item, onClick }) => {
+  const itemBgImage =
+    item.details.sprites.other["official-artwork"].front_shiny ||
+    item.details.sprites.other["official-artwork"].front_default;
 
-  const itemBgImage = item.details.sprites.other['official-artwork'].front_shiny || item.details.sprites.other['official-artwork'].front_default;
-  const pokemonTypes = item.details.types
-  const pokemonStats = item.details.stats
-  console.log(item.details.stats)
+  const pokemonTypes = item.details.types;
+  const pokemonStats = item.details.stats;
+  const isFavourite = item.favourite;
 
-  const getTypeColorClass = (typeName) => {
-    const typeColors = {
+  const getTypeColorClass = (typeName: string): string => {
+    const typeColors: Record<string, string> = {
       poison: "bg-purple-500",
       ground: "bg-orange-500",
       fairy: "bg-pink-500",
@@ -23,30 +27,48 @@ const Card = ({ item }: PostProps) => {
       water: "bg-blue-500",
     };
 
-    return typeColors[typeName] || "bg-gray-500"; // Default to grey
+    return typeColors[typeName] || "bg-gray-500";
   };
 
   return (
-    <article className="flex items-end pl-5 pb-6 text-white  min-h-116 h-116 w-full bg-cover bg-center transform duration-300 hover:-translate-y-1 cursor-pointer  hover:shadow-2xl group rounded-lg" style={{ borderRadius: '120px', marginBottom: '200px', height: '200px', backgroundImage: `url(${itemBgImage})` }}>
+    <article
+      className="flex items-end pl-5 pb-6 text-white min-h-116 h-116 w-full bg-cover bg-center transform duration-300 hover:-translate-y-1 cursor-pointer hover:shadow-2xl group rounded-lg"
+      style={{
+        borderRadius: "120px",
+        marginBottom: "200px",
+        height: "200px",
+        backgroundImage: `url(${itemBgImage})`,
+      }}
+      onClick={onClick}
+    >
       <div className="flex flex-col pokemon-metadata">
-        <p className="font-bold flex justify-around items-center pokemon-name">{
-          item.name.toUpperCase()}
-          <div className="text-white-500 text-2xl">&#10084;</div>
-        </p>
+        <div className="font-bold flex justify-between items-center pokemon-name">
+          {item.name.toUpperCase()}
+          <div className={`text-2xl ${isFavourite ? "text-red-500" : "text-white"}`}>
+            &#10084;
+          </div>
+        </div>
         <div className="labels flex flex-wrap gap-x-1 gap-y-2 mt-4">
           {pokemonStats ? (
-            pokemonStats.map((stat: unknown) => (
-              <span className="pokemon-stats">{stat.stat.name}: {stat.base_stat}.</span>
+            pokemonStats.map((stat) => (
+              <span key={stat.stat.name} className="pokemon-stats">
+                {stat.stat.name}: {stat.base_stat}.
+              </span>
             ))
           ) : (
-            <div className="text-xl font-bold">Sorry, No stats available </div>
+            <div className="text-xl font-bold">Sorry, No stats available</div>
           )}
           {pokemonTypes ? (
-            pokemonTypes.map((type: unknown) => (
-              <div className={`px-3 py-1 rounded-full text-sm ${getTypeColorClass(type.type.name)}`}>{type.type.name}</div>
+            pokemonTypes.map((type) => (
+              <div
+                key={type.type.name}
+                className={`px-3 py-1 rounded-full text-sm ${getTypeColorClass(type.type.name)}`}
+              >
+                {type.type.name}
+              </div>
             ))
           ) : (
-            <div className="text-xl font-bold">Sorry, No type available </div>
+            <div className="text-xl font-bold">Sorry, No type available</div>
           )}
         </div>
       </div>
