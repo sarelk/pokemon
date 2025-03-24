@@ -17,3 +17,17 @@
 body {
   color: rgb(var(--foreground-rgb));
 }
+
+.pokemon-metadata {
+  background: antiquewhite;
+  border-radius: 20px;
+  padding: 5px;
+  opacity: 0.9;
+}
+
+.pokemon-name {
+  background-color: black;
+  border-radius: 20px;
+  text-align: center;
+  width:200px;
+}
