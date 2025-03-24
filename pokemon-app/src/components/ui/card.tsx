@@ -1,12 +1,5 @@
 import { Pokemon } from "@/types";
 
-interface Stat {
-  stat: {
-    name: string;
-  };
-  base_stat: number;
-}
-
 export interface CardProps {
   item: Pokemon;
   onClick?: () => void;

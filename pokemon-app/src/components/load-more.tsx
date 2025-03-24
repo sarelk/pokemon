@@ -5,7 +5,6 @@ import { useInView } from "react-intersection-observer";
 import { Spinner } from "@/components/ui/spinner";
 import { fetchPosts } from "@/actions/fetch-posts";
 import { Pokemon } from "@/types";
-{/* @ts-ignore */}
 import { Posts } from "@/components/posts";
 
 export function LoadMore() {
