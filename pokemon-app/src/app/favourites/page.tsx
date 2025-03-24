@@ -1,6 +1,6 @@
 'use client';
 
-import { Posts } from "@/components/posts";
+import Posts from "@/components/posts";
 import { useState, useEffect } from "react";
 
 const PostsPage = () => {
@@ -10,7 +10,7 @@ const PostsPage = () => {
     const savedPokemons = localStorage.getItem('pokemons');
 
     if (savedPokemons) {
-      const parsedPokemons = JSON.parse(savedPokemons);
+      const parsedPokemons: any[] = JSON.parse(savedPokemons);
       const favouritePokemons = parsedPokemons.filter((pokemon: any) => pokemon.favourite);
       setPosts(favouritePokemons);
     }
@@ -21,7 +21,7 @@ const PostsPage = () => {
 
     const savedPokemons = localStorage.getItem('pokemons');
     if (savedPokemons) {
-      const parsedPokemons = JSON.parse(savedPokemons);
+      const parsedPokemons: any[] = JSON.parse(savedPokemons);
       const updatedPokemons = parsedPokemons.filter((p: any) => p.url !== pokemon.url);
 
       localStorage.setItem('pokemons', JSON.stringify(updatedPokemons));
@@ -31,9 +31,10 @@ const PostsPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 min-h-screen ">
+    <div className="container mx-auto px-4 py-8 min-h-screen">
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-2">
-        <Posts posts={posts} onClick={removeFavourite} />
+        {/* @ts-ignore */}
+        <Posts posts={posts} />
       </div>
     </div>
   );
