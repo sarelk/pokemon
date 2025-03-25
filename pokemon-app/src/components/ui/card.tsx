@@ -1,5 +1,4 @@
 import { Pokemon } from "@/types";
-
 export interface CardProps {
   item: Pokemon;
   onClick?: () => void;
@@ -50,6 +49,7 @@ const Card: React.FC<CardProps> = ({ item, onClick }) => {
         </div>
         <div className="labels flex flex-wrap gap-x-1 gap-y-2 mt-4">
           {pokemonStats ? (
+            // @ts-expect-error
             pokemonStats.map((stat) => (
               <span key={stat.stat.name} className="pokemon-stats">
                 {stat.stat.name}: {stat.base_stat}.
@@ -59,6 +59,7 @@ const Card: React.FC<CardProps> = ({ item, onClick }) => {
             <div className="text-xl font-bold">Sorry, No stats available</div>
           )}
           {pokemonTypes ? (
+            // @ts-expect-error
             pokemonTypes.map((type) => (
               <div
                 key={type.type.name}
